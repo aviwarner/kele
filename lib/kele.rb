@@ -46,4 +46,16 @@ class Kele
       },
     headers: { "authorization" => @auth_token })
   end
+
+  def create_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment)
+    response = self.class.post("/checkpoint_submissions",
+    values: {
+      "enrollment_id": 38437,
+      "checkpoint_id": checkpoint_id,
+      "assignment_branch": assignment_branch,
+      "assignment_commit_link": assignment_commit_link,
+      "comment": comment
+      },
+    headers: { "authorization" => @auth_token })
+  end
 end
