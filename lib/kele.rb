@@ -51,11 +51,12 @@ class Kele
     response = self.class.post("/checkpoint_submissions",
     values: {
       "enrollment_id": 38437,
-      "checkpoint_id": checkpoint_id,
-      "assignment_branch": assignment_branch,
-      "assignment_commit_link": assignment_commit_link,
+      "checkpoint_id": checkpoint_id, #2555
+      "assignment_branch": assignment_branch, #"submissions"
+      "assignment_commit_link": assignment_commit_link, #https://github.com/aviwarner/kele/commit/2feadad6fc03dd015cd2f6973345dd783f107e2d
       "comment": comment
       },
     headers: { "authorization" => @auth_token })
+    puts response
   end
 end
