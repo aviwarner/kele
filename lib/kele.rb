@@ -16,7 +16,7 @@ class Kele
 
   def get_me
     response = self.class.get('/users/me', headers: { "authorization" => @auth_token })
-    @current_user = JSON.parse(response.body)
+    JSON.parse(response.body)
   end
 
 end
