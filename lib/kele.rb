@@ -10,6 +10,7 @@ class Kele
 
   def initialize(email, password)
     @auth_token = self.class.post('/sessions', body: {"email": email,"password": password})["auth_token"]
+
     if @auth_token.nil?
       p "Authentication incorrect"
     else
@@ -19,6 +20,8 @@ class Kele
 
   def get_me
     response = self.class.get('/users/me', headers: { "authorization" => @auth_token })
+    @mentor_id = JSON.parse(response.body)['current_enrollment']['mentor_id']
+    puts @mentor_id
     JSON.parse(response.body)
   end
 
@@ -43,20 +46,9 @@ class Kele
       "recipient_id": recipient_id,
       "subject": subject,
       "stripped-text": body
-      },
+    },
     headers: { "authorization" => @auth_token })
   end
 
-  def create_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment)
-    response = self.class.post("/checkpoint_submissions",
-    values: {
-      "enrollment_id": 38437,
-      "checkpoint_id": checkpoint_id, #2555
-      "assignment_branch": assignment_branch, #"submissions"
-      "assignment_commit_link": assignment_commit_link, #https://github.com/aviwarner/kele/commit/2feadad6fc03dd015cd2f6973345dd783f107e2d
-      "comment": comment
-      },
-    headers: { "authorization" => @auth_token })
-    puts response
-  end
+
 end
