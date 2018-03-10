@@ -9,7 +9,7 @@ module Roadmap
     JSON.parse(response.body)
   end
 
-  def create_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment)
+  def create_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment, token = nil)
     response = self.class.post("/checkpoint_submissions",
     values: {
       "enrollment_id": 38437,
@@ -17,6 +17,7 @@ module Roadmap
       "assignment_branch": assignment_branch, #"submissions"
       "assignment_commit_link": assignment_commit_link, #https://github.com/aviwarner/kele/commit/2feadad6fc03dd015cd2f6973345dd783f107e2d
       "comment": comment,
+      "token": token,
       },
     headers: { :content_type => 'application/json', :authorization => @auth_token })
     puts response
